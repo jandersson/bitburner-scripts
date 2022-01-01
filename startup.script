@@ -1,0 +1,147 @@
+/*
+the hub runs out of memory
+*/
+
+import {doHack} from "common.script"
+
+if (args[0]){
+	var hackTarget = args[0];
+} else {
+	var hackTarget = "joesguns";
+}
+
+function hackMachines(machines, scriptName){
+	for (var i = 0; i < machines.length; ++i){
+		tprint("Hacking " + machines[i]);
+		doHack(scriptName, machines[i], hackTarget);
+	}
+}
+
+var servers0port = [
+	"joesguns",
+	"n00dles",
+	"sigma-cosmetics",
+	"nectar-net",
+	"hong-fang-tea",
+	"harakiri-sushi",
+	"foodnstuff"
+];
+
+var servers1port = [
+	"neo-net",
+	"zer0",
+	"max-hardware",
+	"iron-gym",
+	"CSEC"
+];
+
+var servers2port = [
+	"phantasy",
+	"omega-net",
+	"silver-helix",
+	"the-hub",
+	"avmnite-02h",
+	"crush-fitness",
+	"johnson-ortho"
+];
+
+var servers3port = [
+	"rothman-uni",
+	"rho-construction",
+	"summit-uni",
+	"millenium-fitness",
+	"comptek",
+	"netlink",
+	"catalyst",
+	"I.I.I.I"
+];
+
+var servers4port = [
+	"snap-fitness",
+	"unitalife",
+	"zb-def",
+	"nova-med",
+	"alpha-ent",
+	"syscore",
+	"lexo-corp",
+	"aevum-police",
+	"univ-energy",
+	"global-pharm",
+	"run4theh111z",
+	"applied-energetics"
+];
+
+var servers5port = [
+	"zb-institute",
+	"defcomm",
+	"infocomm",
+	"galactic-cyber",
+	"omnia",
+	"solaris",
+	"deltaone",
+	"icarus",
+	"taiyang-digital",
+	"zeus-med",
+	"aerocorp",
+	"darkweb",
+	"b-and-a",
+	"The-Cave",
+	"w0r1d_d43m0n",
+	"fulcrumtech",
+	"microdyne",
+	"vitalife",
+	"helios",
+	"titan-labs"
+];
+
+var hackScript = "early-hack-template.script";
+var buyScript = "purchase-server-8gb.script";
+var redeployScript = "redeploy-pserv.script";
+
+tprint("Running " + redeployScript + " [" + hackTarget + "]");
+run(redeployScript, 1, hackTarget);
+
+// tprint("Running " + buyScript);
+// exec(buyScript, "home");
+
+hackMachines(servers0port, hackScript);
+
+while (!fileExists("BruteSSH.exe")) {
+	sleep(60000);
+}
+
+hackMachines(servers1port, hackScript);
+
+// run("join-csec.script");
+
+while (!fileExists("FTPCrack.exe")) {
+	sleep(60000);
+}
+
+hackMachines(servers2port, hackScript);
+
+while (!fileExists("relaySMTP.exe")){
+	sleep(60000);
+}
+
+hackMachines(servers3port, hackScript);
+
+while (!fileExists("HTTPWorm.exe")){
+	sleep(60000);
+}
+
+hackMachines(servers4port, hackScript);
+
+while (!fileExists("SQLInject.exe")){
+	sleep(60000);
+	tprint("Couldn't find SQLInject.exe... sleeping");
+}
+
+hackMachines(servers5port, hackScript);
+
+var numThreads = Math.floor((getServerMaxRam("home") - getServerUsedRam("home")) / getScriptRam(hackScript));
+if (numThreads > 0){
+	run(hackScript, numThreads, hackTarget);
+}else {
+	tprint("No available memory on home to run script " + hackScript);
+}

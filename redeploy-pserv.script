@@ -1,0 +1,9 @@
+import {pservKillAll, pservDeployScript, pservExecScript} from "common.script"
+
+var hackTarget = args[0];
+
+pservKillAll();
+pservDeployScript("early-hack-template.ns");
+// pservDeployScript("low-mem-early-hack-template.ns");
+pservExecScript("early-hack-template.ns", hackTarget);
+// pservExecScript("low-mem-early-hack-template.ns", hackTarget)

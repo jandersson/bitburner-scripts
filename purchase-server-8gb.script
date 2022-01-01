@@ -1,0 +1,17 @@
+var ram = 8;
+var script = "early-hack-template.script";
+var purchasedServers = getPurchasedServers();
+if (purchasedServers.length == getPurchasedServerLimit()){
+	tprint("Max servers reached!");
+	exit();
+}
+
+var i = purchasedServers.length;
+while (i < getPurchasedServerLimit()){
+	if (getServerMoneyAvailable("home") > getPurchasedServerCost(ram)) {
+		var hostname = purchaseServer("pserv" + i, ram);
+		scp(script, hostname);
+		exec(script, hostname, 3);
+		++i;
+	}
+}
