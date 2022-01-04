@@ -1,4 +1,5 @@
 /** @param {NS} ns **/
+/** @param {import(".").NS } ns */
 export async function main(ns) {
     var exp = 1;
     var target = ns.args[0];
@@ -26,7 +27,6 @@ export async function main(ns) {
         ns.exec(scriptName, host, 1, target);
     }
     ns.tprint("Max servers reached!");
-    // ++exp;
     var servers = ns.getPurchasedServers();
     ns.tprint("debug: " + 2 ** exp + " > " + ns.getServerMaxRam(servers[0]));
     for (exp; exp < Math.log2(ns.getPurchasedServerMaxRam()); ++exp){

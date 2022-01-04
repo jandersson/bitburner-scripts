@@ -1,0 +1,26 @@
+var server = args[0];
+if (!args[0]){
+    tprint("Usage: run " + getScriptName() + " <host>");
+    exit();
+}
+if (!serverExists(server)){
+    tprint(server + " doesn't exist! Exiting...");
+    exit();
+}
+
+tprint(server);
+tprint("-----");
+tprint("Server base security level: " + getServerBaseSecurityLevel(server));
+tprint("Server current security level: " + getServerSecurityLevel(server));
+tprint("Server growth rate: " + getServerGrowth(server));
+tprint("Netscript hack() execution time: " +
+    getHackTime(server) / 1000 + " seconds");
+tprint("Netscript grow() execution time: " + 
+    getGrowTime(server) / 1000 + " seconds");
+tprint("Netscript weaken() execution time: " +
+    getWeakenTime(server) / 1000 + " seconds");
+tprint("Server money (avail/max): " 
+    + nFormat(getServerMoneyAvailable(server), '0.0a') + "/" 
+    + nFormat(getServerMaxMoney(server), '0.0a'));
+tprint("Server RAM (Used/Max): " + getServerUsedRam(server) + "/" 
+    + getServerMaxRam(server));
