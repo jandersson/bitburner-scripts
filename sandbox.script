@@ -1,0 +1,10 @@
+function printTasks(){
+    var tasks = gang.getTaskNames();
+    for (var i = 0; i < tasks.length; ++i){
+        tprint(tasks[i]);
+        tprint("------");
+        tprint(gang.getTaskStats(tasks[i]));
+    }
+}
+var info = gang.getGangInformation();
+tprint(info['wantedLevelGainRate'] > 0);

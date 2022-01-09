@@ -1,0 +1,54 @@
+// export interface Gang;
+
+var gangsToTry = ['Slum Snakes', 'NiteSec', 'Blackhand'];
+
+function doRecruit(){
+    if (gang.canRecruitMember()){
+        memId = 0;
+        memName = "ganger";
+        while (!gang.recruitMember("ganger" + memId)){
+            ++memId;
+        }
+        tprint("Recruiting good old " + memName + memId);
+    }
+}
+
+function quarterMaster(){
+    var items = gang.getEquipmentNames();
+    var members = gang.getMemberNames();
+    for (var i = 0; i < members.length; ++i){
+        for (var j = 0; j < items.length; ++j){
+            gang.purchaseEquipment(members[i], items[j]);            
+        }
+    }
+}
+
+function taskMaster(){
+    var members = gang.getMemberNames();
+    var tasks = gang.getTaskNames();
+    for (var i = 0; i < members.length; ++i){
+        if (gang.getGangInformation()['wantedLevelGainRate'] > 0){
+            gang.setMemberTask(members[i], 'Ethical Hacking');
+        } else {
+            gang.setMemberTask(members[i], 'Ransomware');
+        }
+        sleep(1000);
+    }
+
+}
+
+if (!gang.inGang()){
+    for (var i = 0; i < gangsToTry.length; ++i){
+        madegang = gang.createGang(gangsToTry[i]);
+        tprint("Created gang: " + madegang);
+    }
+} else {
+    tprint("You are in a gang!");
+}
+
+while(true){
+    doRecruit();
+    taskMaster();
+    // quarterMaster();
+    sleep(60000);
+}

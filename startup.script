@@ -1,13 +1,14 @@
-/*
-the hub runs out of memory
-*/
-
 import {doHack} from "common.script"
 
 if (args[0]){
 	var hackTarget = args[0];
 } else {
 	var hackTarget = "joesguns";
+}
+
+if (getHackingLevel() < getServerRequiredHackingLevel(hackTarget)){
+	tprint("hacking level too low for target!");
+	exit();
 }
 
 function hackMachines(machines, scriptName){
@@ -68,7 +69,8 @@ var servers4port = [
 	"univ-energy",
 	"global-pharm",
 	"run4theh111z",
-	"applied-energetics"
+	"applied-energetics",
+	"."
 ];
 
 var servers5port = [
@@ -91,7 +93,16 @@ var servers5port = [
 	"microdyne",
 	"vitalife",
 	"helios",
-	"titan-labs"
+	"titan-labs",
+	"omnitek",
+	"blade",
+	"nwo",
+	"clarkinc",
+	"nwo",
+	"4sigma",
+	"powerhouse-fitness",
+	"stormtech",
+	"kuai-gong"
 ];
 
 var hackScript = "early-hack-template.script";

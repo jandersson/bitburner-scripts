@@ -1,0 +1,64 @@
+function pservKillAll(){
+    var servers = getPurchasedServers();
+    for (var i = 0; i < servers.length; ++i){
+        killall(servers[i]);
+    }
+}
+
+function pservDeployScript(script){
+    var servers = getPurchasedServers();
+    for (var i = 0; i < servers.length; ++i){
+        scp(script, servers[i]);
+    }
+}
+
+function pservExecScript(scriptName, scriptArgs){
+    var servers = getPurchasedServers();
+    for (var i = 0; i < servers.length; ++i){
+        numThreads = Math.floor(getServerMaxRam(servers[i]) 
+                                / getScriptRam(scriptName));
+        // tprint("numThreads="+numThreads);
+        if (numThreads > 0){
+            exec(scriptName, servers[i], numThreads, scriptArgs);
+        } else {
+            tprint("No memory available to execute " + scriptName + " on " + servers[i] + "!");
+        }
+    }
+}
+
+function doHack(scriptName, serverName, scriptArgs) {
+	scp(scriptName, serverName);
+	killall(serverName);
+	numPorts = getServerNumPortsRequired(serverName);
+	if (numPorts == 1 && fileExists("BruteSSH.exe")) {
+		brutessh(serverName);
+	} else if (numPorts == 2 && fileExists("FTPCrack.exe")){
+		brutessh(serverName);
+		ftpcrack(serverName);
+	} else if (numPorts == 3 && fileExists("relaySMTP.exe")){
+        brutessh(serverName);
+        ftpcrack(serverName);
+        relaysmtp(serverName);
+    } else if (numPorts == 4 && fileExists("HTTPWorm.exe")){
+        brutessh(serverName);
+        ftpcrack(serverName);
+        relaysmtp(serverName);
+        httpworm(serverName);
+    } else if (numPorts == 5 && fileExists("SQLInject.exe")){
+        brutessh(serverName);
+        ftpcrack(serverName);
+        relaysmtp(serverName);
+        httpworm(serverName);
+        sqlinject(serverName);
+    }
+	if (!hasRootAccess(serverName)) {
+		nuke(serverName);
+	}
+	var numThreads = Math.floor(getServerMaxRam(serverName) / getScriptRam(scriptName));
+    if (numThreads > 0){
+        exec(hackScript, serverName, numThreads, scriptArgs);
+    }else {
+        tprint("No memory available to run " + scriptName + " on " + serverName);
+    }
+	return;
+}
