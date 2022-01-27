@@ -25,6 +25,7 @@ async function map_network_details(ns){
             };
         }
     }
+    await ns.write('server_details.txt', details, 'w');
     return details;
 }
 
