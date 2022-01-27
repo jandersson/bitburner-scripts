@@ -102,7 +102,10 @@ var servers5port = [
 	"4sigma",
 	"powerhouse-fitness",
 	"stormtech",
-	"kuai-gong"
+	"kuai-gong",
+	"ecorp",
+	"megacorp",
+	"fulcrumassets"
 ];
 
 var hackScript = "early-hack-template.script";
