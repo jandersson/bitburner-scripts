@@ -1,4 +1,3 @@
-/** @param {NS} ns **/
 /** @param {import(".").NS } ns */
 export async function main(ns) {
     var exp = 1;
@@ -17,7 +16,7 @@ export async function main(ns) {
         ns.tprint("Purchasing server with " + (2 ** exp) + "GB memory");
         var host = ns.purchaseServer("pserv", 2 ** exp);
         ns.tprint(host + " purchased");
-        
+
         if (exp === 1){
             var scriptName = "low-mem-early-hack-template.ns";
         } else {
@@ -44,12 +43,12 @@ export async function main(ns) {
                 var scriptName = "early-hack-template.ns";
                 if (exp === 1){
                     var scriptName = "low-mem-early-hack-template.ns";
-                } 
+                }
                 await ns.scp(scriptName, "home", host);
                 var numThreads = Math.floor(ns.getServerMaxRam(host) / ns.getScriptRam(scriptName))
                 ns.tprint("Executing hack script with " + numThreads + " threads");
                 ns.exec(scriptName, host, numThreads, target);
-            }    
+            }
         }
     }
 }
