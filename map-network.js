@@ -49,16 +49,21 @@ async function countHackPrograms(ns){
 
 /** @param {import(".").NS } ns */
 export async function main(ns){
+    var hackScript = "early-hack-template.script";
+    var buyScript = "purchase-server-8gb.script";
+    var redeployScript = "redeploy-pserv.script";
     var details = await map_network_details(ns);
     var num_hack_programs = await countHackPrograms(ns);
 
 
     var all_rooted = false;
     var num_machines = Object.keys(details).length;
+    // ns.tprint(details);
     while(!all_rooted){
 
         var num_root_count = 0;
         details = await map_network_details(ns);
+        num_hack_programs = await countHackPrograms(ns);
         for (const [key, value] of Object.entries(details)) {
             if (value['have_root']){
                 num_root_count++;
