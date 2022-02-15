@@ -54,7 +54,7 @@ function buyThings(ns){
 		haveTor = true;
 	}
 	if (haveTor & programs.length > 0){
-		for (var i = 0; i < programs.length; ++i){
+		for (let i in programs){
 			var name = programs[i].name;
 			var cost = programs[i].cost;
 			if (ns.fileExists(name)){
@@ -72,9 +72,10 @@ function buyThings(ns){
 
 /** @param {import(".").NS } ns */
 export async function main(ns) {
-    while(true){
-        await buyThings(ns);
-        // await buyThings();
+    while(programs.length > 0){
+		// ns.tprint("programs length: ", programs.length);
+        buyThings(ns);
         await ns.sleep(10_000);
     }
+	ns.tprint("All warez bought! Exiting ...");
 }
