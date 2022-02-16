@@ -2,7 +2,7 @@
 export async function main(ns){
     while (true){
         var factions = ns.checkFactionInvitations();
-        for (var i = 0; i < factions.length; ++i){
+        for (let i in factions){
             var joined = ns.joinFaction(factions[i]);
             if (joined){
                 ns.tprint("Joined ", factions[i], "!");
@@ -10,5 +10,4 @@ export async function main(ns){
         }
         await ns.sleep(60_000);
     }
-
 }
