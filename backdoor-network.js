@@ -1,5 +1,4 @@
 
-// let factions_to_join = ["CSEC", "I.I.I.I", "avmnite-02h", "run4theh111z"];
 
 
 /** @param {import(".").NS } ns */
@@ -57,7 +56,6 @@ export async function main(ns) {
         }
         connect_to_target(ns, host);
         await ns.sleep(1_000);
-        ns.hackAnalyze
         let success = await ns.installBackdoor();
         ns.tprint(success);
         if (success) {
